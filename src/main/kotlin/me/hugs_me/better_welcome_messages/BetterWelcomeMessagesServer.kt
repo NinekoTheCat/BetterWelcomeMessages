@@ -17,7 +17,8 @@ import org.dizitart.kno2.serialization.KotlinXSerializationMapper
 import org.dizitart.no2.common.module.NitriteModule.module
 import org.dizitart.no2.index.NitriteTextIndexer
 import org.dizitart.no2.index.fulltext.UniversalTextTokenizer
-import org.dizitart.no2.rocksdb.RocksDBModule
+import org.dizitart.no2.mvstore.MVStoreModule
+
 
 
 @Environment(EnvType.SERVER)
@@ -41,7 +42,7 @@ object BetterWelcomeMessagesServer : DedicatedServerModInitializer {
     @Environment(EnvType.SERVER)
     fun serverStarting(server: MinecraftServer) {
 
-        val storeModule = RocksDBModule.withConfig()
+        val storeModule = MVStoreModule.withConfig()
             .filePath(
                 Path(
                     FabricLoader.getInstance().configDir.toAbsolutePath().toString(),
