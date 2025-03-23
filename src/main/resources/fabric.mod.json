@@ -42,9 +42,9 @@
     ],
     "mc-publish": {
     "dependencies": [
-      "fzzy_config@0.6.7(required)(modrinth:hYykXjDp)",
-      "placeholder-api@2.5.2+1.21.3(embedded)(modrinth:eXts2L7r)",
-      "fabric-permissions-api@0.3.3(embedded)(modrinth:lzVo0Dll)"
+      "fzzy_config@0.6.7(required){modrinth:hYykXjDp}",
+      "placeholder-api@2.5.2+1.21.3(embedded){modrinth:eXts2L7r}",
+      "fabric-permissions-api@0.3.3(embedded){modrinth:lzVo0Dll}"
     ]
   }
   }
