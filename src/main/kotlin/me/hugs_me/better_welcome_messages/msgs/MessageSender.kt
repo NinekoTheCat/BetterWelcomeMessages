@@ -49,7 +49,7 @@ object MessageSender {
             accumulator = Text.of(listenerParser.parseText(message[0], context))
         } else if (message.count() >= 0) {
             accumulator =
-                message.map { listenerParser.parseText(it, context).copyContentOnly() }.reduce { acc, mutableText ->
+                message.map { listenerParser.parseText(it, context).copy() }.reduce { acc, mutableText ->
                     acc.append("\n").append(mutableText)
                 }
         }
