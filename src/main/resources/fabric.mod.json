@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "better-welcome-messages",
+  "version": "${version}",
+  "name": "Better Welcome Messages",
+  "description": "Adds colorful messages into the game!",
+  "authors": [
+    "Klepsi(CinnamonTheCat)"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/project/betterwelcomemessages",
+    "sources": "https://github.com/NinekoTheCat/BetterWelcomeMessages"
+  },
+  "license": "MIT",
+  "icon": "assets/better-welcome-messages/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "me.hugs_me.better_welcome_messages.BetterWelcomeMessages",
+        "adapter": "kotlin"
+      }
+    ],
+    "server": [
+      {
+        "value": "me.hugs_me.better_welcome_messages.BetterWelcomeMessagesServer",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*",
+    "fzzy_config": ">=0.6.7"
+  },
+  "suggests": {
+  },
+  "custom": {
+    "fzzy_config": [
+      "better-welcome-messages"
+    ]
+  }
+}
