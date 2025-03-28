@@ -1,5 +1,9 @@
 name: publish
-on: [workflow_dispatch]
+on:
+  release:
+    types:
+      - released
+
 
 jobs:
   build:

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "id": "better-welcome-messages",
-  "version": "${version}",
+  "version": "${project.version}",
   "name": "Better Welcome Messages",
   "description": "Adds colorful messages into the game!",
   "authors": [
     "Klepsi(CinnamonTheCat)"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/project/betterwelcomemessages",
-    "sources": "https://github.com/NinekoTheCat/BetterWelcomeMessages"
+    "homepage": "${project.mod_modrinth_link}",
+    "sources": "${project.mod_source}"
   },
   "license": "MIT",
   "icon": "assets/better-welcome-messages/icon.png",
@@ -36,6 +36,7 @@
     "fabric-language-kotlin": "*",
     "fzzy_config": ">=0.6.7"
   },
+
   "custom": {
     "fzzy_config": [
       "better-welcome-messages"
@@ -46,6 +47,13 @@
       "placeholder-api@2.5.2+1.21.3(embedded){modrinth:eXts2L7r}",
       "fabric-permissions-api@0.3.3(embedded){modrinth:lzVo0Dll}"
     ]
-  }
+  },
+    "modmenu": {
+      "update_checker": true,
+      "links": {
+        "modmenu.modrinth": "${project.mod_modrinth_link}",
+        "modmenu.github_releases": "${project.mod_github_releases}"
+      }
+    }
   }
 }
