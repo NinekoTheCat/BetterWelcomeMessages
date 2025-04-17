@@ -9,11 +9,8 @@ on:
     paths-ignore:
       - 'docs/**'
   push:
-    paths:
-      - '**.gradle.kts'
-      - 'src/**'
-      - 'gradle/**'
-      - 'versions/**'
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   build:
