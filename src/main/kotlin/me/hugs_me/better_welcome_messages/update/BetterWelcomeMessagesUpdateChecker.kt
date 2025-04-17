@@ -29,6 +29,7 @@ import net.fabricmc.loader.api.Version
 import net.minecraft.GameVersion
 import net.minecraft.MinecraftVersion
 import org.slf4j.LoggerFactory
+import java.security.MessageDigest
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.read
 import kotlin.concurrent.write
@@ -71,16 +72,14 @@ object BetterWelcomeMessagesUpdateChecker {
     @OptIn(ExperimentalStdlibApi::class)
     private suspend fun asyncCheck(): UpdatedVersionResponseBody? {
         logger.info("Checking for updates...")
-//        val me = mod.origin.paths.first().toFile()
-//        if (me.extension != ".jar") {
-//            logger.warn("$me is not a jar file! cannot check for updates!")
-//            return null
-//        }
-//        val digest = MessageDigest.getInstance("SHA-512")
-//        digest.update(me.readBytes())
-//        val textDigest = digest.digest().toHexString()
-        val textDigest =
-            "95ae0c26fd61500d88cfeb01a0ff879b841f91deda243701db0e9a95a90a1260538ff534de6ba5410300b3ecb5a4aff5e896947e235373bce8529fa87055930b"
+        val me = mod.origin.paths.first().toFile()
+        if (me.extension != ".jar") {
+            logger.warn("$me is not a jar file! cannot check for updates!")
+            return null
+        }
+        val digest = MessageDigest.getInstance("SHA-512")
+        digest.update(me.readBytes())
+        val textDigest = digest.digest().toHexString()
         val request = UpdatedVersionFile(hash = textDigest)
         val response = client.post(request) {
             url {
