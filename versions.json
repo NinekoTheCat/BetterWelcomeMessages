@@ -8,14 +8,13 @@
     "version": "0.1",
     "title": "0.1",
     "aliases": [
-      "latest"
+      "latest",
+      "stable"
     ]
   },
   {
     "version": "0.0",
     "title": "0.0",
-    "aliases": [
-      "stable"
-    ]
+    "aliases": []
   }
 ]
