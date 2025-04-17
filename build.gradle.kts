@@ -1,19 +1,22 @@
+import com.palantir.gradle.gitversion.GitVersionPlugin
+import me.modmuss50.mpp.ReleaseType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.utils.toSetOrEmpty
 import java.net.URI
-
-
 plugins {
 	id ("fabric-loom").version("1.10-SNAPSHOT")
 	`maven-publish`
 	kotlin("jvm").version("2.1.20")
 	kotlin("plugin.serialization").version("2.1.20")
+    id("me.modmuss50.mod-publish-plugin") version "0.8.4"
+    id("com.palantir.git-version") version "3.2.0"
 }
 
 version =  property("mod_version")!!
 
 group = property("maven_group")!!
 base {
-	archivesName  = property("archives_base_name")!! as String
+	archivesName  = "${property("archives_base_name")!!}-mc${stonecutter.current.project}"
 }
 repositories {
 	maven {
@@ -41,37 +44,44 @@ fabricApi {
 		client = true
 	}
 }
+loom {
+    runConfigs.all {
+        ideConfigGenerated(true)
+        runDir = "../../run"
+    }
 
+}
 dependencies {
 	// To change the versions see the gradle.properties file
-	minecraft ("net.minecraft:minecraft:${property("minecraft_version")}")
-	mappings ("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
-	modImplementation ("net.fabricmc:fabric-loader:${property("loader_version")}")
+	minecraft("com.mojang:minecraft:${stonecutter.current.project}")
+	mappings ("net.fabricmc:yarn:${property("deps.yarn_mappings")}:v2")
+    modImplementation(libs.fabric.loader)
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation(libs.fabric.api)
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_version")}")
 	modImplementation(libs.fabric.language.kotlin)
 
-	modImplementation(libs.fzzy.config)
+	modImplementation("me.fzzyhmstrs:fzzy_config:${property("deps.fzzy_config")}")
 
-
-	include(implementation(platform("org.dizitart:nitrite-bom:4.3.0"))!!)
+    include(implementation(platform("org.dizitart:nitrite-bom:4.3.0"))!!)
 	include(implementation  ("org.dizitart:potassium-nitrite")!!)
 	include(implementation  ("org.dizitart:nitrite")!!)
 	include(implementation  ("org.dizitart:potassium-nitrite")!!)
 	include(implementation  ("org.dizitart:nitrite-mvstore-adapter")!!)
-
-	include(modImplementation("eu.pb4:placeholder-api:2.5.2+1.21.3")!!)
+	include(modImplementation("eu.pb4:placeholder-api:${property("deps.placeholder-api")}")!!)
 	include(modImplementation("me.lucko:fabric-permissions-api:0.3.3")!!)
-	include(implementation ("com.h2database:h2:2.3.232")!!)
+    implementation(libs.h2)
+	include(libs.h2)
 
-	modLocalRuntime ("com.terraformersmc:modmenu:13.0.2")
+
+	modLocalRuntime ("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
 }
 tasks {
 	processResources {
+        inputs.property("minecraft", stonecutter.current.version)
 		filesMatching("fabric.mod.json") {
-			expand(getProperties())
+			expand(getProperties() +mapOf("minecraft" to stonecutter.current.version) )
 		}
 	}
 
@@ -90,6 +100,24 @@ tasks {
 		}
 
 	}
+
+    register<Copy>("buildAndCollect") {
+        group = "build"
+
+        from(remapJar.get().archiveFile)
+        into(rootProject.layout.buildDirectory.file("libs/"))
+        dependsOn("build")
+    }
+    register<Copy>("assembleAndCollect") {
+        group = "build"
+
+        from(remapJar.get().archiveFile)
+        into(rootProject.layout.buildDirectory.file("libs/"))
+        dependsOn("assemble")
+    }
+    this.publishMods.configure {
+        dependsOn("assembleAndCollect")
+    }
 }
 java {
 	withSourcesJar()
@@ -110,4 +138,44 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+
+publishMods {
+    val mod = property("mod_version") as String
+    val mc = stonecutter.current.project
+    displayName = "Better Welcome Messages v$mod mc$mc"
+    version = "$mod+mc$mc"
+    type = ReleaseType.of(providers.environmentVariable("RELEASE_TYPE").getOrElse("STABLE"))
+    file = tasks.remapJar.get().archiveFile
+    additionalFiles.from(tasks.remapSourcesJar.get().archiveFile)
+    modLoaders.add("fabric")
+    changelog = file(rootDir.path + "/CHANGELOG.md").readText()
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN").getOrElse(String())
+        projectId = "YQKZc9je"
+        minecraftVersions.add(mc)
+        requires{
+            id="hYykXjDp"
+            slug = "fzzy_config"
+            version = property("deps.fzzy_config").toString()
+        }
+        embeds {
+            id="eXts2L7r"
+            slug = "placeholder-api"
+            version = property("deps.placeholder-api").toString()
+
+        }
+        embeds {
+            id="lzVo0Dll"
+            slug = "fabric-permissions-api"
+            version = "0.3.3"
+        }
+    }
+    github {
+        announcementTitle = "Better Welcome Messages v$mod for $mc release."
+        accessToken = providers.environmentVariable("GITHUB_TOKEN").getOrElse(String())
+        repository = "NinekoTheCat/BetterWelcomeMessages"
+        commitish= providers.environmentVariable("GIT_BRANCH").getOrElse(String())
+    }
 }
