@@ -34,6 +34,9 @@ jobs:
           path: build/libs/
   build-docs:
     runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: ./docs
     steps:
       - uses: actions/checkout@v4
       - name: Configure Git Credentials
