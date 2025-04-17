@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="../../assets/icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
       
       
 
@@ -58,6 +58,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#welcomemessagetext" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -329,6 +334,19 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    File
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -340,6 +358,50 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcomemessagetext" class="md-nav__link">
+    <span class="md-ellipsis">
+      welcomeMessageText
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      strategy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkforupdates" class="md-nav__link">
+    <span class="md-ellipsis">
+      checkForUpdates
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -371,6 +433,41 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#welcomemessagetext" class="md-nav__link">
+    <span class="md-ellipsis">
+      welcomeMessageText
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      strategy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkforupdates" class="md-nav__link">
+    <span class="md-ellipsis">
+      checkForUpdates
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -395,7 +492,36 @@
 
   <h1>File</h1>
 
-
+<p>By default your <code>config/better-welcome-messages</code> should look something like this:</p>
+<pre><code class="language-toml"># ...
+welcomeMessageText = [
+    &quot;Welcome to &lt;rb&gt;&lt;url:'https://modrinth.com/project/betterwelcomemessages'&gt;Better Welcome Messages! v%server:mod_version better-welcome-messages%&lt;/url&gt;&lt;/rb&gt; %player:displayname%&quot;,
+    &quot;If you are not an administrator then don't worry, otherwise change the &lt;font:uniform&gt;main.toml&lt;/font&gt; file in &lt;font:uniform&gt;config/better-welcome-messages&lt;/font&gt;&quot;,
+    &quot;❤.&quot;,
+    &quot;alternatively install it on your client and change it via the config screen.&quot;,
+    &quot;If there are any issues, or you have feedback you can submit it over &lt;green&gt;&lt;url:'https://github.com/NinekoTheCat/BetterWelcomeMessages/issues'&gt;here&lt;/url&gt;&lt;/green&gt;.&quot;
+]
+strategy = &quot;HASH_CHANGED&quot;
+checkForUpdates = true
+</code></pre>
+<h2 id="welcomemessagetext"><code>welcomeMessageText</code></h2>
+<p>This variable controls the text that will be displayed when the player joins the game.
+Each 'element' in the list is a new line in the message that gets sent to the player. and each of these will
+be parsed according to
+<a href="https://placeholders.pb4.eu/user/text-format/">Placeholder API's Simplified Text Format</a>.</p>
+<p>It also supports anything on these lists:</p>
+<ul>
+<li>https://placeholders.pb4.eu/user/default-placeholders/#player</li>
+<li>https://placeholders.pb4.eu/user/default-placeholders/#server</li>
+</ul>
+<h2 id="strategy"><code>strategy</code></h2>
+<p>One of <code>ONCE</code> or <code>HASH_CHANGED</code>.
+<code>HASH_CHANGED</code>: This means that every time you change the content of the welcome message the player will receive the
+updated message.
+<code>ONCE</code>: Once the player gets a welcome message regardless of if you update the content or not they won't get it.
+You can freely swap between them as it still keeps track of which version the player saw regardless of setting.</p>
+<h2 id="checkforupdates"><code>checkForUpdates</code></h2>
+<p>Whenever or not the mod should check for updates on startup.</p>
 
 
 
@@ -418,7 +544,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2025 05:44:07">April 17, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2025 22:51:05">April 17, 2025</span>
   </span>
 
     
@@ -428,7 +554,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2025 05:44:07">April 17, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2025 03:40:45">April 17, 2025</span>
   </span>
 
     
@@ -438,11 +564,12 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
       
     </span>
     <nav>
       
+        <a href="mailto:cnotsomark@gmail.com">Niko Dale</a>
     </nav>
   </span>
 
