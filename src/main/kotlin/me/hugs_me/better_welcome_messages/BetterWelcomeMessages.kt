@@ -4,7 +4,9 @@ import com.mojang.brigadier.CommandDispatcher
 import me.hugs_me.better_welcome_messages.commands.HasSentCommand
 import me.hugs_me.better_welcome_messages.commands.HelpCommand
 import me.hugs_me.better_welcome_messages.commands.SeeCommand
+import me.hugs_me.better_welcome_messages.update.BetterWelcomeMessagesUpdateChecker
 import me.lucko.fabric.api.permissions.v0.Permissions
+import net.fabricmc.api.EnvType
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.loader.api.FabricLoader
@@ -18,8 +20,13 @@ object BetterWelcomeMessages : ModInitializer {
     private val logger = LoggerFactory.getLogger("better-welcome-messages")
     const val MOD_ID = "better-welcome-messages"
     override fun onInitialize() {
-        logger.info("Hello <3 my version is ${FabricLoader.getInstance().getModContainer(MOD_ID).get().metadata.version}")
+        logger.info("Hello <3 my version is ${BetterWelcomeMessagesUpdateChecker.mod.metadata.version}")
         Configs.init()
+        // mod menu isn't installed so we have to run it ourselves
+        if (FabricLoader.getInstance()
+                .getModContainer("modmenu").isEmpty || (FabricLoader.getInstance().environmentType == EnvType.SERVER)
+        )
+            BetterWelcomeMessagesUpdateChecker.check()
         CommandRegistrationCallback.EVENT.register { dispatcher: CommandDispatcher<ServerCommandSource>,
                                                      _: CommandRegistryAccess,
                                                      environment: CommandManager.RegistrationEnvironment ->
@@ -32,4 +39,6 @@ object BetterWelcomeMessages : ModInitializer {
             }
         }
     }
+
+
 }

@@ -26,6 +26,12 @@
         "value": "me.hugs_me.better_welcome_messages.BetterWelcomeMessagesServer",
         "adapter": "kotlin"
       }
+    ],
+    "modmenu": [
+      {
+        "value": "me.hugs_me.better_welcome_messages.BetterWelcomeMessagesModMenu",
+        "adapter": "kotlin"
+      }
     ]
   },
   "depends": {

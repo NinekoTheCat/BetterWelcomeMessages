@@ -1,8 +1,7 @@
-import com.palantir.gradle.gitversion.GitVersionPlugin
 import me.modmuss50.mpp.ReleaseType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.utils.toSetOrEmpty
 import java.net.URI
+
 plugins {
 	id ("fabric-loom").version("1.10-SNAPSHOT")
 	`maven-publish`
@@ -73,7 +72,9 @@ dependencies {
     implementation(libs.h2)
 	include(libs.h2)
 
-
+    implementation(libs.bundles.ktor.client)
+    include(libs.bundles.ktor.client)
+    modApi("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 	modLocalRuntime ("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
 }
@@ -83,6 +84,9 @@ tasks {
 		filesMatching("fabric.mod.json") {
 			expand(getProperties() +mapOf("minecraft" to stonecutter.current.version) )
 		}
+        filesMatching("assets/default_welcome_message.txt") {
+            expand(getProperties() + mapOf("minecraft" to stonecutter.current.version))
+        }
 	}
 
 	compileJava {

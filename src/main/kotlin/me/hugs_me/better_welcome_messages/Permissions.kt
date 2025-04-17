@@ -8,4 +8,5 @@ object BWMPermissions {
     const val HAS_SENT_PERMISSION = "$MOD_ID.has_sent"
     const val EDIT_MESSAGE_PERMISSION = "$MOD_ID.config"
     const val GET_MESSAGE_PERMISSION = "$MOD_ID.receive.message"
+    const val SEE_UPDATE_PERMISSION = "$MOD_ID.receive.update"
 }

@@ -1,0 +1,5 @@
+Welcome to <rb><url:'https://modrinth.com/project/betterwelcomemessages'>Better Welcome Messages! v%server:mod_version better-welcome-messages%</url></rb> %player:displayname%
+If you are not an administrator then don't worry, otherwise change the <font:uniform>main.toml</font> file in <font:uniform>config/better-welcome-messages</font>
+❤.
+alternatively install it on your client and change it via the config screen.
+If there are any issues, or you have feedback you can submit it over <green><url:'https://github.com/NinekoTheCat/BetterWelcomeMessages/issues'>here</url></green>.

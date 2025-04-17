@@ -11,6 +11,10 @@ stonecutter registerChiseled tasks.register("chiseledBuildAndCollect", stonecutt
     group = "project"
     ofTask("buildAndCollect")
 }
+stonecutter registerChiseled tasks.register("chiseledGenSources", stonecutter.chiseled) {
+    group = "project"
+    ofTask("genSources")
+}
 stonecutter registerChiseled tasks.register("chiseledAssemble", stonecutter.chiseled) {
     group = "project"
     ofTask("assemble")
