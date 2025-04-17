@@ -1,0 +1,13 @@
+[versions]
+kotlin ="2.1.20"
+# fabric
+fabric_version = "0.119.2+1.21.4"
+fabric_kotlin_version = "1.13.2+kotlin.2.1.20"
+# config
+fzzy_config = "0.6.7+1.21.3"
+# nitrite
+nitrite="4.3.0"
+[libraries]
+fzzy-config = {module="me.fzzyhmstrs:fzzy_config", version.ref = "fzzy_config"}
+fabric-language-kotlin = {module = "net.fabricmc:fabric-language-kotlin", version.ref="fabric_kotlin_version"}
+fabric-api = {module = "net.fabricmc.fabric-api:fabric-api", version.ref="fabric_version"}
