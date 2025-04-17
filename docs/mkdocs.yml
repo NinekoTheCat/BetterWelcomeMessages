@@ -1,0 +1,33 @@
+site_name: Better Welcome Messages
+theme:
+  language: en
+  name: material
+  logo: assets/icon.png
+  favicon: assets/icon.png
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.tooltips
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+edit_uri: edit/main/docs/docs/
+repo_url: https://github.com/NinekoTheCat/BetterWelcomeMessages
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+  - git-authors
+extra:
+  version:
+    provider: mike
+    default: stable
+markdown_extensions:
+  - tables
+  - admonition
+  - abbr
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+watch:
+  - includes
