@@ -161,18 +161,15 @@ publishMods {
         minecraftVersions.add(mc)
         requires{
             id="hYykXjDp"
-            slug = "fzzy_config"
             version = property("deps.fzzy_config").toString()
         }
         embeds {
             id="eXts2L7r"
-            slug = "placeholder-api"
             version = property("deps.placeholder-api").toString()
 
         }
         embeds {
             id="lzVo0Dll"
-            slug = "fabric-permissions-api"
             version = "0.3.3"
         }
     }
