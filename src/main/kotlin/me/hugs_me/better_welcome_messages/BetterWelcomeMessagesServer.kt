@@ -50,14 +50,14 @@ object BetterWelcomeMessagesServer : DedicatedServerModInitializer {
                 player,
                 BWMPermissions.SEE_UPDATE_PERMISSION,
                 4
-            ) && update != null && update.isUpdateAvailable
+            ) && update != null && update.isUpdateAvailable()
         ) {
             player.playSoundToPlayer(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.NEUTRAL, .75f, 1f)
             player.sendMessage(
                 TagParser.SIMPLIFIED_TEXT_FORMAT.parseText(
                     "" +
                             "There is a new update for Better Welcome Messages available!\n" +
-                            "<underline><aqua><url:'${update.downloadLink}'>click here to go get the updated version!</url></aqua></underline>\n" +
+                            "<underline><aqua><url:'${update.getDownloadLink()}'>click here to go get the updated version!</url></aqua></underline>\n" +
                             "You can disable these messages by turning off update checking or by updating.",
                     PlaceholderContext.of(player).asParserContext()
                 )

@@ -6,9 +6,9 @@ plugins {
 	id ("fabric-loom").version("1.10-SNAPSHOT")
 	`maven-publish`
 	kotlin("jvm").version("2.1.20")
-	kotlin("plugin.serialization").version("2.1.20")
     id("me.modmuss50.mod-publish-plugin") version "0.8.4"
     id("com.palantir.git-version") version "3.2.0"
+    id("com.google.devtools.ksp").version("2.1.20-2.0.0")
 }
 
 version =  property("mod_version")!!
@@ -51,6 +51,7 @@ loom {
 
 }
 dependencies {
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
 	// To change the versions see the gradle.properties file
 	minecraft("com.mojang:minecraft:${stonecutter.current.project}")
 	mappings ("net.fabricmc:yarn:${property("deps.yarn_mappings")}:v2")
@@ -71,9 +72,11 @@ dependencies {
 	include(modImplementation("me.lucko:fabric-permissions-api:0.3.3")!!)
     implementation(libs.h2)
 	include(libs.h2)
-
-    implementation(libs.bundles.ktor.client)
-    include(libs.bundles.ktor.client)
+    include(implementation("com.squareup.okio:okio:3.6.0")!!)
+    include(implementation("com.squareup.okio:okio-jvm:3.6.0")!!)
+    include(implementation("com.squareup.okhttp3:okhttp:4.12.0")!!)
+    include(implementation("com.squareup.moshi:moshi-kotlin:1.15.2")!!)
+    include(implementation("com.squareup.moshi:moshi:1.15.2")!!)
     modApi("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 	modLocalRuntime ("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
