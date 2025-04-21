@@ -6,6 +6,7 @@ plugins {
 	id ("fabric-loom").version("1.10-SNAPSHOT")
 	`maven-publish`
 	kotlin("jvm").version("2.1.20")
+    kotlin("plugin.serialization").version("2.1.20")
     id("me.modmuss50.mod-publish-plugin") version "0.8.4"
     id("com.palantir.git-version") version "3.2.0"
     id("com.google.devtools.ksp").version("2.1.20-2.0.0")
